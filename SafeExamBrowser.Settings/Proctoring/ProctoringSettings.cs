@@ -34,17 +34,23 @@ namespace SafeExamBrowser.Settings.Proctoring
 		/// <summary>
 		/// Determines the visibility of the proctoring window.
 		/// </summary>
-		public WindowVisibility WindowVisibility { get; set; }
+		public WindowVisibility WindowVisibility { get; set; } = WindowVisibility.AllowToShow;
 
 		/// <summary>
 		/// All settings for remote proctoring with Zoom.
 		/// </summary>
 		public ZoomSettings Zoom { get; set; }
+		
+		/// <summary>
+		/// All settings for remote proctoring with Custom MediaServer.
+		/// </summary>
+		public LiveStreamSettings LiveStream { get; set; }
 
 		public ProctoringSettings()
 		{
 			JitsiMeet = new JitsiMeetSettings();
 			Zoom = new ZoomSettings();
+			LiveStream = new LiveStreamSettings();
 		}
 	}
 }

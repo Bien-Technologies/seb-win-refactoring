@@ -98,9 +98,153 @@ namespace SafeExamBrowser.Configuration.ConfigurationData.DataMapping
 				case Keys.Proctoring.Zoom.UserName:
 					MapZoomUserName(settings, value);
 					break;
+				
+				case Keys.Proctoring.LiveStreaming.AllowChat:
+					LiveStreamAllowChat(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.AllowRaiseHand:
+					LiveStreamAllowRaiseHands(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.AllowRecording:
+					LiveStreamAllowRecording(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.AudioMuted:
+					LiveStreamAudioMuted(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.AudioOnly:
+					LiveStreamAudioOnly(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.Enabled:
+					LiveStreamEnabled(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.ReceiveAudio:
+					LiveStreamReceiveAudio(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.ReceiveVideo:
+					LiveStreamReceiveVideo(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.RoomName:
+					LiveStreamRoomName(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.SendAudio:
+					LiveStreamSendAudio(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.SendVideo:
+					LiveStreamSendVideo(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.ServerUrl:
+					LiveStreamServerUrl(settings, value);
+					break;
+				case Keys.Proctoring.LiveStreaming.VideoMuted:
+					LiveStreamVideoMuted(settings, value);
+					break;
 			}
 		}
 
+		private void LiveStreamAudioOnly(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.AudioOnly = allow;
+			}
+		}
+
+		private void LiveStreamEnabled(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.Enabled = allow;
+			}
+		}
+
+		private void LiveStreamReceiveAudio(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.ReceiveAudio = allow;
+			}
+		}
+
+		private void LiveStreamReceiveVideo(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.ReceiveVideo = allow;
+			}
+		}
+
+		private void LiveStreamRoomName(AppSettings settings, object value)
+		{
+			if (value is string allow)
+			{
+				settings.Proctoring.LiveStream.RoomName = allow;
+			}
+		}
+
+		private void LiveStreamSendAudio(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.SendAudio = allow;
+			}
+		}
+
+		private void LiveStreamSendVideo(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.SendVideo = allow;
+			}
+		}
+
+		private void LiveStreamServerUrl(AppSettings settings, object value)
+		{
+			if (value is string allow)
+			{
+				settings.Proctoring.LiveStream.ServerUrl = allow;
+			}
+		}
+
+		private void LiveStreamVideoMuted(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.VideoMuted = allow;
+			}
+		}
+
+		private void LiveStreamAudioMuted(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.AudioMuted = allow;
+			}
+		}
+
+		private void LiveStreamAllowRecording(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.AllowRecording = allow;
+			}
+		}
+
+		private void LiveStreamAllowRaiseHands(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.AllowRaiseHand = allow;
+			}
+		}
+
+		private void LiveStreamAllowChat(AppSettings settings, object value)
+		{
+			if (value is bool allow)
+			{
+				settings.Proctoring.LiveStream.AllowChat = allow;
+			}
+		}
+		
 		private void MapJitsiMeetAllowChat(AppSettings settings, object value)
 		{
 			if (value is bool allow)

@@ -258,6 +258,23 @@ namespace SafeExamBrowser.Configuration.ConfigurationData
 				internal const string Subject = "zoomSubject";
 				internal const string UserName = "zoomUserInfoDisplayName";
 			}
+
+			internal static class LiveStreaming
+			{
+				internal const string Enabled = "liveStreamEnable";
+				internal const string AllowChat = "liveStreamFeatureFlagChat";
+				internal const string AudioMuted = "liveStreamAudioMuted";
+				internal const string AudioOnly = "liveStreamAudioOnly";
+				internal const string ReceiveAudio = "liveStreamReceiveAudio";
+				internal const string ReceiveVideo = "liveStreamReceiveVideo";
+				internal const string RoomName = "liveStreamRoom";
+				internal const string ServerUrl = "liveStreamServerURL";
+				internal const string SendAudio = "liveStreamSendAudio";
+				internal const string SendVideo = "liveStreamSendVideo";
+				internal const string AllowRaiseHand = "liveStreamFeatureFlagRaiseHand";
+				internal const string VideoMuted = "liveStreamVideoMuted";
+				internal const string AllowRecording = "liveStreamFeatureFlagRecording";
+			}
 		}
 
 		internal static class Security

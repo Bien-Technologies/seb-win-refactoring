@@ -72,6 +72,8 @@ namespace SafeExamBrowser.Runtime
 			var remoteSessionDetector = new RemoteSessionDetector(ModuleLogger(nameof(RemoteSessionDetector)));
 			var runtimeHost = new RuntimeHost(appConfig.RuntimeAddress, new HostObjectFactory(), ModuleLogger(nameof(RuntimeHost)), FIVE_SECONDS);
 			var runtimeWindow = uiFactory.CreateRuntimeWindow(appConfig);
+
+			//AS: the purpose of server proxy is to connect with server API
 			var server = new ServerProxy(appConfig, ModuleLogger(nameof(ServerProxy)));
 			var serviceProxy = new ServiceProxy(appConfig.ServiceAddress, new ProxyObjectFactory(), ModuleLogger(nameof(ServiceProxy)), Interlocutor.Runtime);
 			var sessionContext = new SessionContext();

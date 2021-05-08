@@ -102,7 +102,14 @@ namespace SafeExamBrowser.Proctoring
 				start &= !string.IsNullOrWhiteSpace(settings.Zoom.MeetingNumber);
 				start &= !string.IsNullOrWhiteSpace(settings.Zoom.UserName);
 			}
+			else if (settings.LiveStream.Enabled)
+			{
+				start = !string.IsNullOrWhiteSpace(settings.LiveStream.RoomName);
+				start &= !string.IsNullOrWhiteSpace(settings.LiveStream.ServerUrl);
+			}
 
+			logger.Info($"Proctoring server: '{settings.LiveStream.ServerUrl}', Room name: '{settings.LiveStream.RoomName}'");
+			
 			if (start)
 			{
 				StartProctoring();
@@ -175,14 +182,21 @@ namespace SafeExamBrowser.Proctoring
 					{
 						control.Dispatcher.Invoke(() =>
 						{
+							control.CoreWebView2.NavigationStarting += CoreWebView2OnNavigationStarting;
+							control.CoreWebView2.NavigationCompleted += CoreWebView2OnNavigationCompleted;
+							control.CoreWebView2.Settings.AreDevToolsEnabled = true;
+							control.CoreWebView2.Settings.IsWebMessageEnabled = true;
+							control.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
 							control.CoreWebView2.Navigate(filePath);
+							// control.CoreWebView2.OpenDevToolsWindow();
 						});
 					});
 
 					window = uiFactory.CreateProctoringWindow(control);
-					window.SetTitle(settings.JitsiMeet.Enabled ? settings.JitsiMeet.Subject : settings.Zoom.Subject);
+					var title = settings.LiveStream.Enabled ?  settings.LiveStream.UserName : (settings.JitsiMeet.Enabled ? settings.JitsiMeet.Subject : settings.Zoom.UserName);
+					window.SetTitle(title);
 					window.Show();
-
+					
 					if (settings.WindowVisibility == WindowVisibility.AllowToShow || settings.WindowVisibility == WindowVisibility.Hidden)
 					{
 						window.Hide();
@@ -192,7 +206,8 @@ namespace SafeExamBrowser.Proctoring
 					Tooltip = text.Get(TextKey.Notification_ProctoringActiveTooltip);
 					NotificationChanged?.Invoke();
 
-					logger.Info($"Started proctoring with {(settings.JitsiMeet.Enabled ? "Jitsi Meet" : "Zoom")}.");
+					var provider = settings.LiveStream.Enabled ? "LiveStream" : ( settings.JitsiMeet.Enabled ? "JitsiMeet" : "Zoom");
+					logger.Info($"Started proctoring with {provider}.");
 				}
 				catch (Exception e)
 				{
@@ -228,7 +243,7 @@ namespace SafeExamBrowser.Proctoring
 
 		private string LoadContent(ProctoringSettings settings)
 		{
-			var provider = settings.JitsiMeet.Enabled ? "JitsiMeet" : "Zoom";
+			var provider = settings.LiveStream.Enabled ? "LiveStream" : ( settings.JitsiMeet.Enabled ? "JitsiMeet" : "Zoom");
 			var assembly = Assembly.GetAssembly(typeof(ProctoringController));
 			var path = $"{typeof(ProctoringController).Namespace}.{provider}.index.html";
 
@@ -262,7 +277,20 @@ namespace SafeExamBrowser.Proctoring
 					html = html.Replace("%%_SIGNATURE_%%", settings.Zoom.Signature);
 					html = html.Replace("%%_USER_NAME_%%", settings.Zoom.UserName);
 				}
-
+				else if (settings.LiveStream.Enabled)
+				{
+					html = html.Replace("%%_ALLOW_CHAT_%%", settings.LiveStream.AllowChat ? "chat" : "");
+					html = html.Replace("%%_ALLOW_RAISE_HAND_%%", settings.LiveStream.AllowRaiseHand ? "raisehand" : "");
+					html = html.Replace("%%_ALLOW_RECORDING_%%", settings.LiveStream.AllowRecording ? "recording" : "");
+					html = html.Replace("'%_AUDIO_MUTED_%'", settings.LiveStream.AudioMuted && settings.WindowVisibility != WindowVisibility.Hidden ? "true" : "false");
+					html = html.Replace("'%_AUDIO_ONLY_%'", settings.LiveStream.AudioOnly ? "true" : "false");
+					html = html.Replace("%%_DOMAIN_%%", settings.LiveStream.ServerUrl);
+					html = html.Replace("%%_ROOM_NAME_%%", settings.LiveStream.RoomName);
+					html = html.Replace("%%_TOKEN_%%", settings.LiveStream.Token);
+					html = html.Replace("'%_VIDEO_MUTED_%'", settings.LiveStream.VideoMuted && settings.WindowVisibility != WindowVisibility.Hidden ? "true" : "false");
+					html = html.Replace("%%_USER_NAME_%%", settings.LiveStream.UserName);
+				}
+				
 				return html;
 			}
 		}
@@ -270,6 +298,11 @@ namespace SafeExamBrowser.Proctoring
 		private string Sanitize(string serverUrl)
 		{
 			return serverUrl?.Replace($"{Uri.UriSchemeHttp}{Uri.SchemeDelimiter}", "").Replace($"{Uri.UriSchemeHttps}{Uri.SchemeDelimiter}", "");
+		}
+
+		private void CoreWebView2OnNavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
+		{
+			logger.Info($"Proctoring control navigation starting with URI: '{e.Uri}'");
 		}
 	}
 }

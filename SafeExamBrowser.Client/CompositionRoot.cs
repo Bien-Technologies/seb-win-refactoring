@@ -252,6 +252,7 @@ namespace SafeExamBrowser.Client
 			var controller = new ProctoringController(context.AppConfig, new FileSystem(), ModuleLogger(nameof(ProctoringController)), context.Server, text, uiFactory);
 			var operation = new ProctoringOperation(actionCenter, context, controller, logger, controller, taskbar, uiFactory);
 
+			logger?.Log($"# Initializing proctoring");
 			return operation;
 		}
 

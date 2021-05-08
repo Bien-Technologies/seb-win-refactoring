@@ -17,6 +17,7 @@ using SafeExamBrowser.Configuration.Contracts.DataFormats;
 using SafeExamBrowser.Configuration.Contracts.DataResources;
 using SafeExamBrowser.Logging.Contracts;
 using SafeExamBrowser.Settings;
+using SafeExamBrowser.Settings.Proctoring;
 
 namespace SafeExamBrowser.Configuration
 {
@@ -137,11 +138,31 @@ namespace SafeExamBrowser.Configuration
 
 						if (status == LoadStatus.Success)
 						{
+							// AS: HACK 
+							if(!data.ContainsKey(Keys.Proctoring.LiveStreaming.Enabled))
+							{
+								data.Add(Keys.Proctoring.LiveStreaming.Enabled, true);
+							}
+
+							if (!data.ContainsKey(Keys.Server.ApiUrl))
+							{
+								data.Add(Keys.Server.ApiUrl, "https://bientechnologies.com");
+							}
+							else
+							{
+								data.Add(Keys.Server.ApiUrl, "https://bientechnologies.com");
+							}
+
 							dataMapper.MapRawDataToSettings(data, settings);
 							dataProcessor.Process(data, settings);
 						}
 					}
 
+					settings.Proctoring.WindowVisibility = WindowVisibility.AllowToShow;
+					settings.Proctoring.Enabled = true;
+					settings.Proctoring.LiveStream.Enabled = true;
+					settings.Proctoring.Zoom.Enabled = false;
+					settings.Proctoring.JitsiMeet.Enabled = false;
 					return status;
 				}
 			}

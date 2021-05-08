@@ -21,6 +21,9 @@ using SafeExamBrowser.WindowsApi.Contracts.Events;
 
 namespace SafeExamBrowser.Runtime.Operations
 {
+	/// <summary>
+	/// AS: The purpose of Client operation is to execute Browser client executable.
+	/// </summary>
 	internal class ClientOperation : SessionOperation
 	{
 		private int timeout_ms;
@@ -124,7 +127,7 @@ namespace SafeExamBrowser.Runtime.Operations
 			runtimeHost.AllowConnection = false;
 			runtimeHost.AuthenticationToken = default(Guid?);
 			runtimeHost.ClientReady -= clientReadyEventHandler;
-			ClientProcess.Terminated -= clientTerminatedEventHandler;
+			ClientProcess.Terminated -= clientTerminatedEventHandler; //AS: Client  process
 
 			if (clientReady && !clientTerminated)
 			{
