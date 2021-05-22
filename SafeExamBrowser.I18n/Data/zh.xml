@@ -519,4 +519,19 @@
     <Entry key="Version">
         版本
     </Entry>
+    <Entry key="UserLoginDialog_Cancel">
+        Cancel
+    </Entry>
+    <Entry key="UserLoginDialog_Confirm">
+        Confirm
+    </Entry>
+    <Entry key="UserLoginDialog_Title">
+        Login
+    </Entry>
+    <Entry key="UserLoginDialog_Message">
+        Candidate Login
+    </Entry>
+    <Entry key="Version">
+        Version
+    </Entry>
 </Text>

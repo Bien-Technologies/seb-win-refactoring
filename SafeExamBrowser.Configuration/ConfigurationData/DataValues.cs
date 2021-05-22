@@ -265,7 +265,7 @@ namespace SafeExamBrowser.Configuration.ConfigurationData
 			settings.Service.Policy = ServicePolicy.Mandatory;
 			settings.Service.SetVmwareConfiguration = false;
 
-			settings.SessionMode = SessionMode.Normal; //AS:
+			settings.SessionMode = SessionMode.Server; //AS:
 
 			settings.Taskbar.EnableTaskbar = true;
 			settings.Taskbar.ShowApplicationInfo = false;

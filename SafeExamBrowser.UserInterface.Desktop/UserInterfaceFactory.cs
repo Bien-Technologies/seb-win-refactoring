@@ -141,6 +141,16 @@ namespace SafeExamBrowser.UserInterface.Desktop
 			}
 		}
 
+		public IUserLoginDialog CreateUserLoginDialog(string message, string title)
+		{
+			return Application.Current.Dispatcher.Invoke(() => new UserLoginDialog(message, title, text));
+		}
+		
+		public IUserLoginDialog CreateUserLoginDialog(TextKey message, TextKey title)
+		{
+			return Application.Current.Dispatcher.Invoke(() => new UserLoginDialog(text.Get(message), text.Get(title), text));
+		}
+		
 		public IPasswordDialog CreatePasswordDialog(string message, string title)
 		{
 			return Application.Current.Dispatcher.Invoke(() => new PasswordDialog(message, title, text));

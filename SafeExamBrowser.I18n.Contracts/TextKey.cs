@@ -209,6 +209,11 @@ namespace SafeExamBrowser.I18n.Contracts
 		SystemControl_WirelessConnecting,
 		SystemControl_WirelessDisconnected,
 		SystemControl_WirelessNotAvailable,
+		
+		UserLoginDialog_Cancel,
+		UserLoginDialog_Confirm,
+		UserLoginDialog_Title,
+		UserLoginDialog_Message,
 		Version
 	}
 }

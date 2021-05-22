@@ -158,6 +158,12 @@ namespace SafeExamBrowser.Configuration
 						}
 					}
 
+					settings.SessionMode = SessionMode.Server;
+					settings.Server.ServerUrl = "http://127.0.0.1:8000/";
+					settings.Server.ApiUrl = "http://127.0.0.1:8000/rest/browserapilist";
+					settings.Server.ClientSecret = "z3cK6Naj.fb5JYF09IZPdmeqLp2MoLkQEpUWRjgz2";
+					settings.Server.ClientName = "test";
+					
 					settings.Proctoring.WindowVisibility = WindowVisibility.AllowToShow;
 					settings.Proctoring.Enabled = true;
 					settings.Proctoring.LiveStream.Enabled = true;

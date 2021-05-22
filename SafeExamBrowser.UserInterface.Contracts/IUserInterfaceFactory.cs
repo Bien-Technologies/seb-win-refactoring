@@ -130,5 +130,9 @@ namespace SafeExamBrowser.UserInterface.Contracts
 		/// Creates a system control which allows to change the wireless network connection of the computer.
 		/// </summary>
 		ISystemControl CreateWirelessNetworkControl(IWirelessAdapter wirelessAdapter, Location location);
+
+		IUserLoginDialog CreateUserLoginDialog(string message, string title);
+
+		IUserLoginDialog CreateUserLoginDialog(TextKey message, TextKey title);
 	}
 }

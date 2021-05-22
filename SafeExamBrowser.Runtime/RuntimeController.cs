@@ -25,6 +25,7 @@ using SafeExamBrowser.Settings.Service;
 using SafeExamBrowser.UserInterface.Contracts;
 using SafeExamBrowser.UserInterface.Contracts.MessageBox;
 using SafeExamBrowser.UserInterface.Contracts.Windows;
+using SafeExamBrowser.UserInterface.Contracts.Windows.Data;
 
 namespace SafeExamBrowser.Runtime
 {
@@ -392,9 +393,37 @@ namespace SafeExamBrowser.Runtime
 				case ServerFailureEventArgs a:
 					AskForServerFailureAction(a);
 					break;
+				case UserLoginRequiredEventArgs u:
+					AskForUserLogin(u);
+					break;
 			}
 		}
 
+		private void AskForUserLogin(UserLoginRequiredEventArgs loginRequiredEventArgs)
+		{
+			var isStartup = !SessionIsRunning;
+			var isRunningOnDefaultDesktop = SessionIsRunning && Session.Settings.Security.KioskMode == KioskMode.DisableExplorerShell;
+
+			if (isStartup || isRunningOnDefaultDesktop)
+			{
+				TryAskForUserLoginViaDialog(loginRequiredEventArgs);
+			}
+			else
+			{
+				// TryAskForExamSelectionViaClient(args);
+			}
+		}
+
+		private void TryAskForUserLoginViaDialog(UserLoginRequiredEventArgs args)
+		{
+			var dialog = uiFactory.CreateUserLoginDialog(TextKey.UserLoginDialog_Message, TextKey.UserLoginDialog_Title);
+			var result = dialog.Show(runtimeWindow);
+
+			args.Username = result.Username;
+			args.DateOfBirth = result.DateOfBirth;
+			args.Success = result.Success;
+		}
+		
 		private void AskForExamSelection(ExamSelectionEventArgs args)
 		{
 			var isStartup = !SessionIsRunning;

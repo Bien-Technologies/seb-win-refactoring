@@ -38,6 +38,7 @@ namespace SafeExamBrowser.Server
 			try
 			{
 				var json = JsonConvert.DeserializeObject(Extract(content)) as JObject;
+				json = json["data"] as JObject;
 				var apisJson = json["api-versions"];
 
 				foreach (var apiJson in apisJson.AsJEnumerable())
@@ -117,7 +118,8 @@ namespace SafeExamBrowser.Server
 
 			try
 			{
-				var json = JsonConvert.DeserializeObject(Extract(content)) as JArray;
+				var rawJson = JsonConvert.DeserializeObject(Extract(content)) as JObject;
+				var json = rawJson["data"] as JArray;
 
 				foreach (var exam in json.AsJEnumerable())
 				{
@@ -147,6 +149,7 @@ namespace SafeExamBrowser.Server
 			try
 			{
 				var json = JsonConvert.DeserializeObject(Extract(content)) as JObject;
+				json = json["data"] as JObject;
 
 				if (json != default(JObject))
 				{
@@ -252,6 +255,7 @@ namespace SafeExamBrowser.Server
 			try
 			{
 				var json = JsonConvert.DeserializeObject(Extract(content)) as JObject;
+				json = json["data"] as JObject;
 
 				oauth2Token = json["access_token"].Value<string>();
 			}
