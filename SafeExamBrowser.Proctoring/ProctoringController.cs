@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using SafeExamBrowser.Configuration.Contracts;
 using SafeExamBrowser.Core.Contracts.Notifications;
@@ -216,6 +217,8 @@ namespace SafeExamBrowser.Proctoring
 			});
 		}
 
+		
+
 		private void StopProctoring()
 		{
 			if (control != default(ProctoringControl) && window != default(IProctoringWindow))
@@ -303,6 +306,11 @@ namespace SafeExamBrowser.Proctoring
 		private void CoreWebView2OnNavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
 		{
 			logger.Info($"Proctoring control navigation starting with URI: '{e.Uri}'");
+		}
+		
+		private void CoreWebView2OnNavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+		{
+			logger.Info($"Proctoring control navigation completed with status: '{e.WebErrorStatus}'");
 		}
 	}
 }

@@ -131,8 +131,6 @@ namespace SafeExamBrowser.UserInterface.Contracts
 		/// </summary>
 		ISystemControl CreateWirelessNetworkControl(IWirelessAdapter wirelessAdapter, Location location);
 
-		IUserLoginDialog CreateUserLoginDialog(string message, string title);
-
-		IUserLoginDialog CreateUserLoginDialog(TextKey message, TextKey title);
+		IUserLoginDialog CreateUserLoginDialog(ILogger logger, SessionConfiguration session, ConnectionInfo argsConnectionInfo);
 	}
 }

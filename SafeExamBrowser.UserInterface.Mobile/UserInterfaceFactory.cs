@@ -224,12 +224,7 @@ namespace SafeExamBrowser.UserInterface.Mobile
 			}
 		}
 
-		public IUserLoginDialog CreateUserLoginDialog(string message, string title)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public IUserLoginDialog CreateUserLoginDialog(TextKey message, TextKey title)
+		public IUserLoginDialog CreateUserLoginDialog(ILogger logger, SessionConfiguration session, ConnectionInfo argsConnectionInfo)
 		{
 			throw new System.NotImplementedException();
 		}

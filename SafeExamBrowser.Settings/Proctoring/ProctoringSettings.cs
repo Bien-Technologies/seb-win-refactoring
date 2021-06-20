@@ -45,12 +45,18 @@ namespace SafeExamBrowser.Settings.Proctoring
 		/// All settings for remote proctoring with Custom MediaServer.
 		/// </summary>
 		public LiveStreamSettings LiveStream { get; set; }
+		
+		/// <summary>
+		/// Get or Set Candidate information
+		/// </summary>
+		public CandidateModel Candidate { get; set; }
 
 		public ProctoringSettings()
 		{
 			JitsiMeet = new JitsiMeetSettings();
 			Zoom = new ZoomSettings();
 			LiveStream = new LiveStreamSettings();
+			Candidate = new CandidateModel();
 		}
 	}
 }

@@ -148,6 +148,8 @@ namespace SafeExamBrowser.UserInterface.Desktop
 
 		private void OnViewConnect(object sender, EventArgs e)
 		{
+			if (_view.SelectedVideoDevice == "-- Select Camera --") return;
+			
 			if (_view.SelectedVideoDevice == null)
 			{
 				_view.Message("No device selected!", MessageBoxImage.Error);
@@ -179,6 +181,7 @@ namespace SafeExamBrowser.UserInterface.Desktop
 		{
 			var audioDevices = new FilterInfoCollection(FilterCategory.AudioInputDevice);
 			_devices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+			_view.VideoDevices.Add("-- Select Camera --");
 			foreach (FilterInfo filterInfo in _devices)
 			{
 				_view.VideoDevices.Add(filterInfo.Name);

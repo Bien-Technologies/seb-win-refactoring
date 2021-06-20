@@ -416,9 +416,17 @@ namespace SafeExamBrowser.Runtime
 
 		private void TryAskForUserLoginViaDialog(UserLoginRequiredEventArgs args)
 		{
-			var dialog = uiFactory.CreateUserLoginDialog(TextKey.UserLoginDialog_Message, TextKey.UserLoginDialog_Title);
-			var result = dialog.Show(runtimeWindow);
+			var dialog = uiFactory.CreateUserLoginDialog(logger, args.SessionContext, args.ConnectionInfo);
+			UserLoginDialogResult result = dialog.Show(runtimeWindow);
 
+			args.Duration = args.Duration;
+			args.Topic = args.Topic;
+			args.Username = args.Username;
+			args.CandidateKey = args.CandidateKey;
+			args.CandidateName = args.CandidateName;
+			args.ExamCode = args.ExamCode;
+			args.ExamDate = args.ExamDate;
+			args.ExamTime = args.ExamTime;
 			args.Username = result.Username;
 			args.DateOfBirth = result.DateOfBirth;
 			args.Success = result.Success;

@@ -67,6 +67,15 @@ namespace SafeExamBrowser.Server
 								case "seb-ping-endpoint":
 									api.PingEndpoint = location;
 									break;
+								case "validate-candidate-endpoint":
+									api.ValidateCandidateEndpoint = location;
+									break;
+								case "candidate-data-upload-endpoint":
+									api.CandidateDataUploadEndpoint = location;
+									break;
+								case "query-upload-status-endpoint":
+									api.QueryUploadedDataStatusEndpoint = location;
+									break;
 							}
 						}
 

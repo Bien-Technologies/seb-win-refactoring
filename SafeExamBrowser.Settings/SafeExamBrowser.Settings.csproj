@@ -72,6 +72,7 @@
     <Compile Include="Browser\Proxy\ProxyConfiguration.cs" />
     <Compile Include="ConfigurationMode.cs" />
     <Compile Include="Monitoring\DisplaySettings.cs" />
+    <Compile Include="Proctoring\CandidateModel.cs" />
     <Compile Include="Proctoring\JitsiMeetSettings.cs" />
     <Compile Include="Proctoring\LiveStreamSettings.cs" />
     <Compile Include="Proctoring\ProctoringSettings.cs" />

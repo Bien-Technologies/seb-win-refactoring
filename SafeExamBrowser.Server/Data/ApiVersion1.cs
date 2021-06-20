@@ -11,9 +11,19 @@ namespace SafeExamBrowser.Server.Data
 	internal class ApiVersion1
 	{
 		public string AccessTokenEndpoint { get; set; }
+		
 		public string HandshakeEndpoint { get; set; }
+		
 		public string ConfigurationEndpoint { get; set; }
+		
 		public string PingEndpoint { get; set; }
+		
 		public string LogEndpoint { get; set; }
+		
+		public string ValidateCandidateEndpoint { get; set; }
+		
+		public string CandidateDataUploadEndpoint { get; set; }
+		
+		public string QueryUploadedDataStatusEndpoint { get; set; }
 	}
 }

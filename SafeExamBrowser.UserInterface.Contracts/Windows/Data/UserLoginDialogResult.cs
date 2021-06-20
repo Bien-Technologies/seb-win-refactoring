@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SafeExamBrowser.UserInterface.Contracts.Windows.Data
 {
@@ -32,5 +33,32 @@ namespace SafeExamBrowser.UserInterface.Contracts.Windows.Data
 		public System.Drawing.Image AdmitCardImage { get; set; }
 		
 		public System.Drawing.Image GovIdCardImage { get; set; }
+		
+		public string ExamCode { get; set; }
+		
+		public string ExamScheduleKey { get; set; }
+		
+		public DateTime ExamDate { get; set; }
+		
+		public string ExamTime { get; set; }
+		
+		public int Duration { get; set; }
+		
+		public string Topic { get; set; }
+		
+		public string CandidateName { get; set; }
+		
+		public string CandidateKey { get; set; }
+		
+		public IEnumerable<RequiredDocument> Documents { get; set; }
+	}
+
+	public class RequiredDocument
+	{
+		public int Id { get; set; }
+		
+		public bool IsMandatory { get; set; }
+		
+		public string DocumentName { get; set; }
 	}
 }
