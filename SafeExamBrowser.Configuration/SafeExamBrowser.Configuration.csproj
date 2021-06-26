@@ -49,6 +49,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +87,7 @@
     <Compile Include="DataFormats\BinaryBlock.cs" />
     <Compile Include="ConfigurationData\DataMapper.cs" />
     <Compile Include="Cryptography\HashAlgorithm.cs" />
+    <Compile Include="DataFormats\JsonParser.cs" />
     <Compile Include="DataFormats\XmlElement.cs" />
     <Compile Include="DataFormats\XmlParser.cs" />
     <Compile Include="DataFormats\XmlSerializer.cs" />
@@ -107,6 +112,8 @@
       <Name>SafeExamBrowser.Settings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

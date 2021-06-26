@@ -161,6 +161,7 @@ namespace SafeExamBrowser.Runtime
 				passwordEncryption,
 				publicKeyEncryption,
 				symmetricEncryption, xmlParser));
+			
 			configuration.Register(new BinarySerializer(
 				compressor,
 				ModuleLogger(nameof(BinarySerializer)),
@@ -168,8 +169,12 @@ namespace SafeExamBrowser.Runtime
 				publicKeyEncryption,
 				symmetricEncryption,
 				xmlSerializer));
+			
 			configuration.Register(new XmlParser(compressor, ModuleLogger(nameof(XmlParser))));
 			configuration.Register(new XmlSerializer(ModuleLogger(nameof(XmlSerializer))));
+			
+			configuration.Register(new JsonParser(compressor, ModuleLogger(nameof(JsonParser))));
+			
 			configuration.Register(new FileResourceLoader(ModuleLogger(nameof(FileResourceLoader))));
 			configuration.Register(new FileResourceSaver(ModuleLogger(nameof(FileResourceSaver))));
 			configuration.Register(new NetworkResourceLoader(appConfig, new ModuleLogger(logger, nameof(NetworkResourceLoader))));

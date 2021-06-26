@@ -78,18 +78,17 @@ namespace SafeExamBrowser.Runtime.Operations
 			if (args.Success)
 			{
 				logger.Info("The user confirmed.");
-				Context.Next.Settings.Proctoring.Candidate = new CandidateModel()
-				{
-					Duration = args.Duration,
-					Topic = args.Topic,
-					Username = args.Username,
-					CandidateKey = args.CandidateKey,
-					CandidateName = args.CandidateName,
-					ExamCode = args.ExamCode,
-					ExamDate = args.ExamDate,
-					ExamTime = args.ExamTime,
-					DateOfBirth = args.DateOfBirth
-				};
+				if (Context.Next.Settings.Proctoring.Candidate is null) Context.Next.Settings.Proctoring.Candidate = new CandidateModel();
+
+				Context.Next.Settings.Proctoring.Candidate.Username = args.Username;
+				Context.Next.Settings.Proctoring.Candidate.CandidateKey = args.CandidateKey;
+				Context.Next.Settings.Proctoring.Candidate.CandidateName = args.Name;
+				Context.Next.Settings.Proctoring.Candidate.DateOfBirth = args.DateOfBirth;
+				Context.Next.Settings.Proctoring.Candidate.CompanyKey = args.CompanyKey;
+				Context.Next.Settings.Proctoring.Candidate.CompanyName = args.CompanyName;
+				Context.Next.Settings.Proctoring.Candidate.RollNO = args.RollNO;
+				Context.Next.Settings.Server.Institution = args.CompanyKey;
+				
 				return OperationResult.Success;
 			}
 			else

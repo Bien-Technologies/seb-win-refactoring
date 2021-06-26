@@ -229,6 +229,12 @@ namespace SafeExamBrowser.UserInterface.Mobile
 			throw new System.NotImplementedException();
 		}
 
+		public IUserImagesDialog CreateUserImagesDialog(ILogger logger, SessionConfiguration session,
+			ConnectionInfo argsConnectionInfo, string candidateKey, string scheduledExamCode)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		private void InitializeFontAwesome()
 		{
 			// To be able to use FontAwesome in XAML icon resources, we need to make sure that the FontAwesome.WPF assembly is loaded into

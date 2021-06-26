@@ -81,6 +81,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserDialogBase.cs" />
     <Compile Include="WebCam.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -200,9 +201,13 @@
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\ProgressIndicatorViewModel.cs" />
     <Compile Include="ViewModels\RuntimeWindowViewModel.cs" />
+    <Compile Include="Windows\UserImagesDialog.xaml.cs">
+      <DependentUpon>UserImagesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\UserLoginDialog.xaml.cs">
       <DependentUpon>UserLoginDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\UserImagesDialog.xaml" />
     <Page Include="Windows\UserLoginDialog.xaml" />
     <Resource Include="Images\ProctoringNotification_Inactive.xaml">
       <SubType>Designer</SubType>

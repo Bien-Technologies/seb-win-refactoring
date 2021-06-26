@@ -135,10 +135,10 @@ namespace SafeExamBrowser.Server
 			return new ServerResponse(success, message);
 		}
 
-		public ServerResponse<IEnumerable<Exam>> GetAvailableExams(string examId = default(string))
+		public ServerResponse<IEnumerable<Exam>> GetAvailableExams(string examId = default, string candidateKey = default)
 		{
 			var authorization = ("Authorization", $"Bearer {oauth2Token}");
-			var content = $"institutionId={settings.Institution}{(examId == default(string) ? "" : $"&examId={examId}")}";
+			var content = $"institutionId={settings.Institution}{(examId == default(string) ? "" : $"&examId={examId}")}{(candidateKey == default(string) ? "" : $"&candidateKey={candidateKey}")}";
 			var contentType = "application/x-www-form-urlencoded";
 			var exams = default(IList<Exam>);
 
@@ -218,11 +218,13 @@ namespace SafeExamBrowser.Server
 		public void Initialize(ServerSettings settings)
 		{
 			this.settings = settings;
-			httpClient.BaseAddress = new Uri(settings.ServerUrl);
-
-			if (settings.RequestTimeout > 0)
+			if (httpClient.BaseAddress is null || string.IsNullOrWhiteSpace(httpClient.BaseAddress.ToString()))
 			{
-				httpClient.Timeout = TimeSpan.FromMilliseconds(settings.RequestTimeout);
+				httpClient.BaseAddress = new Uri(settings.ServerUrl);
+				if (settings.RequestTimeout > 0)
+				{
+					httpClient.Timeout = TimeSpan.FromMilliseconds(settings.RequestTimeout);
+				}
 			}
 		}
 

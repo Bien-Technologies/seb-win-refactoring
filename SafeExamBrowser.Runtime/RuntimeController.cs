@@ -396,6 +396,9 @@ namespace SafeExamBrowser.Runtime
 				case UserLoginRequiredEventArgs u:
 					AskForUserLogin(u);
 					break;
+				case UserImagesEventArgs u:
+					AskForUserIMages(u);
+					break;
 			}
 		}
 
@@ -413,11 +416,42 @@ namespace SafeExamBrowser.Runtime
 				// TryAskForExamSelectionViaClient(args);
 			}
 		}
+		
+		private void AskForUserIMages(UserImagesEventArgs args)
+		{
+			var isStartup = !SessionIsRunning;
+			var isRunningOnDefaultDesktop = SessionIsRunning && Session.Settings.Security.KioskMode == KioskMode.DisableExplorerShell;
+
+			if (isStartup || isRunningOnDefaultDesktop)
+			{
+				TryAskForUserImagesDialog(args);
+			}
+			else
+			{
+				// TryAskForExamSelectionViaClient(args);
+			}
+		}
 
 		private void TryAskForUserLoginViaDialog(UserLoginRequiredEventArgs args)
 		{
 			var dialog = uiFactory.CreateUserLoginDialog(logger, args.SessionContext, args.ConnectionInfo);
 			UserLoginDialogResult result = dialog.Show(runtimeWindow);
+			
+			args.Username = result.Username;
+			args.CandidateKey = result.CandidateKey;
+			args.Name = result.Name;
+			args.Username = result.Username;
+			args.DateOfBirth = result.DateOfBirth;
+			args.Success = result.Success;
+			args.CompanyKey = result.CompanyKey;
+			args.CompanyName = result.CompanyName;
+			args.RollNO = result.RollNO;
+		}
+		
+		private void TryAskForUserImagesDialog(UserImagesEventArgs args)
+		{
+			var dialog = uiFactory.CreateUserImagesDialog(logger, args.SessionContext, args.ConnectionInfo, args.CandidateKey, args.ScheduledExamCode);
+			UserImagesDialogResult result = dialog.Show(runtimeWindow, args.SelectedExam);
 
 			args.Duration = args.Duration;
 			args.Topic = args.Topic;
@@ -430,6 +464,7 @@ namespace SafeExamBrowser.Runtime
 			args.Username = result.Username;
 			args.DateOfBirth = result.DateOfBirth;
 			args.Success = result.Success;
+			args.ScheduledExamCode = result.ExamScheduleKey;
 		}
 		
 		private void AskForExamSelection(ExamSelectionEventArgs args)

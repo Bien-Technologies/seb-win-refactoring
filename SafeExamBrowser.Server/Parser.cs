@@ -137,7 +137,12 @@ namespace SafeExamBrowser.Server
 						Id = exam["examId"].Value<string>(),
 						LmsName = exam["lmsType"].Value<string>(),
 						Name = exam["name"].Value<string>(),
-						Url = exam["url"].Value<string>()
+						Url = exam["url"].Value<string>(),
+						ExamCode = exam["examCode"].Value<string>(),
+						ScheduleDate = exam["scheduleDate"].Value<DateTime?>(),
+						Duration = exam["duration"].Value<int>(),
+						ExamTime = exam["examTime"].Value<string>(),
+						DocumentsJson = exam["documents"].ToString()
 					});
 				}
 			}

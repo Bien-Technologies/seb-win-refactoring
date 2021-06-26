@@ -59,7 +59,7 @@ namespace SafeExamBrowser.Runtime.Operations
 
 				if (success)
 				{
-					(abort, fallback, success) = TryPerformWithFallback(() => server.GetAvailableExams(Context.Next.Settings.Server.ExamId), out var exams);
+					(abort, fallback, success) = TryPerformWithFallback(() => server.GetAvailableExams(Context.Next.Settings.Server.ExamId, Context.Next.Settings.Proctoring.Candidate.CandidateKey), out var exams);
 
 					if (success)
 					{
@@ -73,6 +73,10 @@ namespace SafeExamBrowser.Runtime.Operations
 						else
 						{
 							success = TrySelectExam(exams, out exam);
+							if (success)
+							{
+								success = TrySelectCandidateImages(exam);
+							}
 						}
 
 						if (success)
@@ -83,7 +87,9 @@ namespace SafeExamBrowser.Runtime.Operations
 							{
 								var info = server.GetConnectionInfo();
 								var status = TryLoadSettings(uri, UriSource.Server, out _, out var settings);
-
+								var candidate = Context.Next.Settings.Proctoring.Candidate;
+								var proctoring = Context.Next.Settings.Proctoring;
+								
 								fileSystem.Delete(uri.LocalPath);
 
 								if (status == LoadStatus.Success)
@@ -246,6 +252,29 @@ namespace SafeExamBrowser.Runtime.Operations
 
 			ActionRequired?.Invoke(args);
 			exam = args.SelectedExam;
+
+			return args.Success;
+		}
+		
+		private bool TrySelectCandidateImages(Exam exam)
+		{
+			var args = new UserImagesEventArgs()
+			{
+				SessionContext = Context.Next, 
+				ConnectionInfo = server.GetConnectionInfo()
+			};
+			
+			args.Username = Context.Next.Settings.Proctoring.Candidate.Username;
+			args.CandidateKey = Context.Next.Settings.Proctoring.Candidate.CandidateKey;
+			args.DateOfBirth = Context.Next.Settings.Proctoring.Candidate.DateOfBirth;
+			args.CompanyKey = Context.Next.Settings.Proctoring.Candidate.CompanyKey;
+			args.CompanyName = Context.Next.Settings.Proctoring.Candidate.CompanyName;
+			args.ExamCode = exam.ExamCode;
+			args.ExamDate = exam.ScheduleDate;
+			args.ScheduledExamCode = exam.Id;
+			args.SelectedExam = exam;
+			
+			ActionRequired?.Invoke(args);
 
 			return args.Success;
 		}

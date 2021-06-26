@@ -21,5 +21,11 @@ namespace SafeExamBrowser.Settings.Proctoring
 		public string CandidateName { get; set; }
 		
 		public string CandidateKey { get; set; }
+		
+		public string RollNO { get; set; }
+		
+		public string CompanyKey { get; set; }
+		
+		public string CompanyName { get; set; }
 	}
 }

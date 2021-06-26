@@ -14,6 +14,7 @@ namespace SafeExamBrowser.Configuration.Contracts.DataFormats
 	public enum FormatType
 	{
 		Binary = 1,
-		Xml
+		Xml,
+		Json
 	}
 }

@@ -20,6 +20,31 @@ namespace SafeExamBrowser.UserInterface.Contracts.Windows.Data
 		/// </summary>
 		public bool Success { get; set; }
 
+		public string CandidateKey { get; set; }
+		
+		public string Name { get; set; }
+		
+		public string RollNO { get; set; }
+		
+		public string CompanyKey { get; set; }
+		
+		public string CompanyName { get; set; }
+		
+		public string HasPendingDocuments { get; set; }
+	}
+
+	public class RequiredDocument
+	{
+		public int Id { get; set; }
+		
+		public bool IsMandatory { get; set; }
+		
+		public string DocumentName { get; set; }
+	}
+	
+	public class UserImagesDialogResult : UserLoginDialogResult
+	{
+
 		public System.Drawing.Image FrontFaceImage { get; set; }
 		
 		public System.Drawing.Image LeftSideImage { get; set; }
@@ -45,20 +70,7 @@ namespace SafeExamBrowser.UserInterface.Contracts.Windows.Data
 		public int Duration { get; set; }
 		
 		public string Topic { get; set; }
-		
-		public string CandidateName { get; set; }
-		
-		public string CandidateKey { get; set; }
-		
-		public IEnumerable<RequiredDocument> Documents { get; set; }
-	}
 
-	public class RequiredDocument
-	{
-		public int Id { get; set; }
-		
-		public bool IsMandatory { get; set; }
-		
-		public string DocumentName { get; set; }
+		public IEnumerable<RequiredDocument> Documents { get; set; }
 	}
 }

@@ -6,6 +6,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+using System;
+
 namespace SafeExamBrowser.Server.Contracts.Data
 {
 	/// <summary>
@@ -32,5 +34,15 @@ namespace SafeExamBrowser.Server.Contracts.Data
 		/// The URL of the exam.
 		/// </summary>
 		public string Url { get; set; }
+		
+		public DateTime? ScheduleDate { get; set; }
+		
+		public string ExamCode { get; set; }
+		
+		public int Duration { get; set; }
+		
+		public string ExamTime { get; set; }
+		
+		public string DocumentsJson { get; set; }
 	}
 }
