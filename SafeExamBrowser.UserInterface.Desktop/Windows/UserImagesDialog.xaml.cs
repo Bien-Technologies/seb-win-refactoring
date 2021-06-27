@@ -176,8 +176,6 @@ namespace SafeExamBrowser.UserInterface.Desktop.Windows
 			selectedExam = (Exam) args;
 			result.Documents = JsonConvert.DeserializeObject<IEnumerable<RequiredDocument>>(selectedExam.DocumentsJson);
 
-			var str = JsonConvert.SerializeObject(session.Settings);
-			
 			return Dispatcher.Invoke(() =>
 			{
 				if (parent is Window window)

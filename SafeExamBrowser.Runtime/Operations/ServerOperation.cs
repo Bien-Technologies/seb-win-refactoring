@@ -85,10 +85,11 @@ namespace SafeExamBrowser.Runtime.Operations
 
 							if (success)
 							{
-								var info = server.GetConnectionInfo();
-								var status = TryLoadSettings(uri, UriSource.Server, out _, out var settings);
 								var candidate = Context.Next.Settings.Proctoring.Candidate;
 								var proctoring = Context.Next.Settings.Proctoring;
+								var info = server.GetConnectionInfo();
+								var status = TryLoadSettings(uri, UriSource.Server, out _, out var settings);
+								
 								
 								fileSystem.Delete(uri.LocalPath);
 

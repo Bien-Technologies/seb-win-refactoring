@@ -6,6 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+using System;
 using SafeExamBrowser.Settings;
 
 namespace SafeExamBrowser.Configuration.ConfigurationData.DataMapping
@@ -30,7 +31,7 @@ namespace SafeExamBrowser.Configuration.ConfigurationData.DataMapping
 
 		private void MapAllowedDisplays(AppSettings settings, object value)
 		{
-			if (value is int count)
+			if (int.TryParse(value.ToString(), out int count))
 			{
 				settings.Display.AllowedDisplays = count;
 			}

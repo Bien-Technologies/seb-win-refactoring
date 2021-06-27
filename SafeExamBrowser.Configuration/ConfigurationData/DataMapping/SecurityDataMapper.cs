@@ -108,6 +108,10 @@ namespace SafeExamBrowser.Configuration.ConfigurationData.DataMapping
 			{
 				settings.Security.KioskMode = KioskMode.None;
 			}
+			
+			#if DEBUG
+			settings.Security.KioskMode = KioskMode.None;
+			#endif
 		}
 
 		private void MapQuitPasswordHash(AppSettings settings, object value)
